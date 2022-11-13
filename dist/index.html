@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="m-2">
+<h1>Kurs React Tydzień 2</h1>
+<hr/>
+<div class="App">
+
+    <div
+            class="TimeboxEditor text-right border-solid border-gray-800 border-2 rounded-md p-3 mb-3"
+    >
+        <label
+        >Co robisz?
+            <input value="Uczę się skrótów klawiszowych" type="text"/></label
+        ><br/>
+        <label>Ile minut? <input value="25" type="number"/></label><br/>
+        <button
+                class="rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
+        >
+            Zacznij
+        </button>
+    </div>
+    <div
+            class="TimeBox border-solid border-gray-800 border-2 rounded-md p-3 mb-3"
+    >
+        <h2 class="text-2xl font-bold text-center">
+            Uczę się skrótów klawiszowych
+        </h2>
+        <div id="root"></div>
+        <div id="rootNew"></div>
+        <!-- <div class="blur-sm grayscale"> -->
+        <div
+                class="ProgressBar border-solid border-red-500 border-2 rounded-md p-1 mb-3 h-8"
+        >
+            <div style="width: 45%" class="h-full bg-red-500"></div>
+        </div>
+        <!-- </div> -->
+        <button
+                class="rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
+        >
+            Start
+        </button>
+        <button
+                class="rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
+        >
+            Stop
+        </button>
+        <button
+                class="rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
+        >
+            Pauzuj
+        </button>
+        Liczba przerw: 2
+    </div>
+</div>
+</body>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+    const rootNewElement = document.getElementById('rootNew');
+    console.log(rootNewElement);
+    const normalizeTime = (time) => {
+
+        const timeArray = time.split(".")
+
+        let normalizeObjectTime = {
+            hours: parseInt(timeArray[0].split(":")[0]),
+            minutes: parseInt(timeArray[0].split(":")[1]),
+            seconds: parseInt(timeArray[0].split(":")[2]),
+            milliseconds: parseInt(timeArray[1])
+        }
+
+        Object.entries(normalizeObjectTime).forEach(([key, value]) => {
+            switch (key) {
+                case 'hours':
+                    if (value >= 24) {
+                        normalizeObjectTime.hours = 23
+                    }
+                    break;
+                case 'minutes':
+                    if (value >= 60) {
+                        normalizeObjectTime.minutes = 59
+                    }
+                    break;
+                case 'seconds':
+                    if (value >= 60) {
+                        normalizeObjectTime.seconds = 59
+                    }
+                    break;
+                case 'milliseconds':
+                    if (value >= 1000) {
+                        normalizeObjectTime.milliseconds = 999
+                    }
+                default:
+                    console.log(`out of ${key}.`);
+            }
+        })
+
+        return normalizeObjectTime
+    }
+
+
+    const improveTimeDisplay = (time) => {
+        const timeObject = Object.entries(time).map(([key, value], index) => {
+
+            if (key != "milliseconds") {
+
+                if (value < 10 && value >= 1) {
+                    return [key, `0${value}`]
+                }
+
+                if (key === 0) {
+                    return [key, `0`];
+                }
+
+            }
+
+            return [key, value];
+        })
+
+        return Object.fromEntries(timeObject)
+
+    }
+
+    const prepareTimeText = (time) => {
+        const normalizeObjectTime = normalizeTime(time);
+        const {hours, minutes, seconds, milliseconds} = improveTimeDisplay(normalizeObjectTime);
+
+        const createSufix = (timeProps, base, singularForm = "a", plurarForm = "y") => {
+            const normalizeTimePros = parseInt(timeProps);
+            let suffix = normalizeTimePros === 1 ? `${base}${singularForm}` : `${base}`;
+            suffix = normalizeTimePros >= 2 && normalizeTimePros <= 9 ? `${base}${plurarForm}` : `${base}`;
+            return suffix
+        }
+
+        const hoursDisplay = createSufix(hours, "godzin");
+        const minutesDisplay = createSufix(minutes, "minut");
+        const secondsDisplay = createSufix(seconds, "sekund");
+        const millisecondsDisplay = createSufix(milliseconds, "milisekund");
+
+        let timeText = []
+
+        const allowDisplay = {
+            hours: false,
+            minutes: false,
+            seconds: false,
+            milliseconds: false,
+        }
+
+        Object.entries({hours, minutes, seconds, milliseconds}).map((key, index) => {
+            if (key[0] === "hours" && parseInt(key[1]) !== 0) {
+                timeText.push(`${key[1]} ${hoursDisplay}`)
+                allowDisplay.minutes = true;
+                allowDisplay.seconds = true;
+                allowDisplay.milliseconds = true;
+            }
+            if (key[0] === "minutes" && allowDisplay.minutes || (parseInt(key[1]) !== 0 && timeText.length === 0)) {
+                timeText.push(`${key[1]} ${minutesDisplay}`)
+                allowDisplay.seconds = true;
+                allowDisplay.milliseconds = true;
+            }
+            if (key[0] === "seconds" && allowDisplay.seconds || (parseInt(key[1]) !== 0 && timeText.length === 0)) {
+                allowDisplay.milliseconds = true;
+                if (key[1] == 0) {
+                    timeText.push(`zero sekund i`)
+
+                } else {
+                    timeText.push(`${key[1]} ${secondsDisplay}`)
+                }
+            }
+            if (key[0] === "milliseconds" && allowDisplay.milliseconds || (parseInt(key[1]) !== 0 && timeText.length === 0)) {
+                timeText.push(`${key[1]} ${millisecondsDisplay}`)
+            }
+
+        })
+
+        return timeText.join(" ");
+    }
+
+    const Clock = ({time}) => {
+
+        const timeText = prepareTimeText(time);
+
+        return (
+            <h2 className="text-lg font-bold text-center text-red-500 m-2">
+                Pozostało {timeText}
+            </h2>
+        );
+    };
+    const ProgessBar = ({procent}) => {
+        return (
+            <div className="w-full h-2 bg-gray-200 rounded-full">
+                <div className="h-full bg-blue-500 rounded-full" style={{width: `${procent}%`}}></div>
+            </div>
+        );
+    };
+
+    const time = "60:30:00.023"
+    const element = (<Clock time={time}/>);
+    const root = ReactDOM.createRoot(rootElement)
+    const rootNew = ReactDOM.createRoot(rootNewElement)
+    root.render(element)
+    rootNew.render(<ProgessBar procent="20"/>)
+</script>
+</html>

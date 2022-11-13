@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="m-2">
+<h1 class="text-3xl mb-2">Kurs React Tydzień 2</h1>
+<hr/>
+<div id="root"></div>
+</body>
+<script src="./prepareTime.js"></script>
+<script type="text/babel">
+
+    const InactiveComponent = ({show = false, children}) => {
+        return (
+            <div className={`${show ? "blur-sm grayscale" : ""}`}>
+                {children}
+            </div>
+        )
+    }
+    const Clock = ({time, isPaused}) => {
+
+        const timeText = prepareTimeText(time);
+
+        return (
+            <InactiveComponent show={isPaused}>
+                <h2 className="text-lg font-bold text-center text-red-500 m-2">
+                    Pozostało {timeText}
+                </h2>
+            </InactiveComponent>
+        );
+    };
+    const ProgressBar = ({procent, trackRemaining = false, isPaused}) => {
+        return (
+            <InactiveComponent show={isPaused}>
+                <div
+                    className={`border-solid border-red-500 border-2 rounded-md p-1 mb-3 h-8 flex row-end ${trackRemaining ? "flex-row-reverse" : ""}`}>
+                    <div style={{width: `${procent}%`}} className="h-full bg-red-500 "></div>
+                </div>
+            </InactiveComponent>
+        );
+    };
+    const Button = ({disabled = false, children, ...props}) => {
+        return (
+            <button
+                {...props}
+                disabled={disabled}
+                className={`rounded-full py-2 mx-1 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 ${disabled ? "bg-gray-600" : "bg-blue-600  hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"} text-white`}
+            >
+                {children}
+            </button>
+        )
+    }
+
+    const TimeBoxEditor = (props) => {
+        const {title, totalTimeInMinutes, onTitleChange, onTotalTimeChange, onConfirm, isEditable} = props;
+        return (
+            <InactiveComponent show={!isEditable}>
+                <div className="text-right border-solid border-gray-800 border-2 rounded-md p-3 mb-3">
+                    <label>
+                        Co robisz?
+                        <input value={title} className="border-solid border-gray-800 border-2"
+                               onChange={onTitleChange} type="text"/>
+                    </label><br/>
+                    <label>Ile minut? <input className="border-solid border-gray-800 border-2"
+                                             value={totalTimeInMinutes}
+                                             onChange={onTotalTimeChange}
+                                             type="number"/></label><br/>
+                    <Button onClick={() => {
+                        onConfirm()
+                    }}>
+                        Zatwierdź zmiany
+                    </Button>
+                </div>
+            </InactiveComponent>
+        )
+    }
+
+    const TimeBoxCreator = ({onCreate}) => {
+        return (
+                <div className="text-right border-solid border-gray-800 border-2 rounded-md p-3 mb-3">
+                    <label>
+                        Co robisz?
+                        <input className="border-solid border-gray-800 border-2"
+                               type="text"/>
+                    </label><br/>
+                    <label>Ile minut? <input className="border-solid border-gray-800 border-2"
+                                             type="number"/></label><br/>
+                    <Button onClick={onCreate}>
+                        Dodaj Timebox
+                    </Button>
+                </div>
+        )
+    }
+
+    class CurrentTimeBox extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = ({
+                isRunning: false,
+                isPaused: false,
+                pausedCount: 0,
+                elapsedTimeInSeconds: 0,
+            })
+
+            this.handleStart = this.handleStart.bind(this)
+            this.handleStop = this.handleStop.bind(this)
+            this.togglePause = this.togglePause.bind(this)
+        }
+
+        startTimer() {
+            this.intervalId = window.setInterval(() => {
+                this.setState((prevState) => ({
+                    elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.1
+                }))
+            }, 100)
+            console.log("START", this.intervalId);
+        }
+
+        stopTimer() {
+            clearInterval(this.intervalId);
+            console.log("STOP", this.intervalId);
+        }
+
+        handleStart = () => {
+            this.setState({
+                isRunning: true,
+            })
+            this.startTimer();
+        }
+
+        handleStop = () => {
+            this.setState({
+                isRunning: false,
+                isPaused: false,
+                pausedCount: 0,
+                elapsedTimeInSeconds: 0,
+            })
+            this.stopTimer();
+        }
+
+        togglePause() {
+            this.setState(
+                (prevState) => {
+                    const isPaused = !prevState.isPaused;
+                    if (isPaused) {
+                        this.stopTimer();
+                    } else {
+                        this.startTimer();
+                    }
+                    return ({
+                        isPaused,
+                        pausedCount: isPaused ? prevState.pausedCount + 1 : prevState.pausedCount,
+                    });
+                }
+            )
+        }
+
+        render() {
+            const {title, totalTimeInMinutes, isEditable, onEdit} = this.props;
+            const {pausedCount, isRunning, isPaused, elapsedTimeInSeconds} = this.state
+            const totalTimInSeconds = totalTimeInMinutes * 60;
+            const timeLeftInSeconds = totalTimInSeconds - elapsedTimeInSeconds;
+            const minuteLeft = Math.floor(timeLeftInSeconds / 60);
+            const secondsLeft = Math.floor(timeLeftInSeconds % 60);
+            const progressInPercent = Math.floor((elapsedTimeInSeconds / totalTimInSeconds) * 100);
+            return (
+                <InactiveComponent show={isEditable}>
+                    <div className="border-solid border-gray-800 border-2 rounded-md p-3 mb-3">
+                        <h2 className="text-2xl font-bold text-center">
+                            {title}
+                        </h2>
+                        <Clock time={`00:${minuteLeft}:${secondsLeft}.0`} isPaused={isPaused}/>
+                        <ProgressBar procent={progressInPercent} isPaused={isPaused}/>
+                        <Button disabled={isEditable} onClick={onEdit}>Edytuj</Button>
+                        <Button disabled={isRunning} onClick={this.handleStart}>Start</Button>
+                        <Button disabled={!isRunning} onClick={this.handleStop}>Stop</Button>
+                        <Button disabled={!isRunning}
+                                onClick={this.togglePause}>{isPaused ? "Wznów" : "Pauzuj"}</Button>
+                        Liczba przerw: {pausedCount}
+                    </div>
+                </InactiveComponent>
+            )
+        }
+    }
+
+    class EditableTimeBox extends React.Component {
+
+        state = {
+            title: "Uczę się o komponentach kontrolowanych",
+            totalTimeInMinutes: 25,
+            isEditable: true
+        }
+
+        handleTitleChange = (event) => {
+            this.setState({title: event.target.value});
+        }
+
+        handleTotalTimeChange = (event) => {
+            this.setState({totalTimeInMinutes: event.target.value});
+        }
+
+        handleConfirm = () => {
+            this.setState({isEditable: false});
+        }
+
+        handleEdit = () => {
+            this.setState({isEditable: true});
+        }
+
+        render() {
+            const {title, totalTimeInMinutes, isEditable} = this.state;
+            return (
+                <>
+                    <TimeBoxEditor
+                        onTitleChange={this.handleTitleChange}
+                        onTotalTimeChange={this.handleTotalTimeChange}
+                        title={title}
+                        isEditable={isEditable}
+                        onConfirm={this.handleConfirm}
+                        totalTimeInMinutes={totalTimeInMinutes}
+                    />
+                    <CurrentTimeBox title={title} totalTimeInMinutes={totalTimeInMinutes} isEditable={isEditable}
+                                    onEdit={this.handleEdit}/>
+                </>
+            )
+        }
+    }
+
+    const TimeBox = ({timeboxDetails, onDelete, onEdit}) => {
+
+        const {id, title, totalTimeInMinutes} = timeboxDetails;
+        return (
+            <>
+                <h3 className={"border-2 border-gray-800 my-2 rounded-md p-1"}>
+                    {title} - {totalTimeInMinutes} min.
+                </h3>
+                <Button onClick={() => {
+                    onDelete(id)
+                }}>Usuń</Button><br/>
+                <Button onClick={() => {
+                    onEdit(id)
+                }}>Zmień</Button>
+            </>
+        )
+    }
+
+    class TimeboxList extends React.Component {
+
+        state = {
+            timeboxes: [
+                {id: 1, title: "Uczę się list", totalTimeInMinutes: 25},
+                {id: 2, title: "Uczę się formularzy", totalTimeInMinutes: 15},
+                {id: 3, title: "Uczę się komponentów niekontrolowanych", totalTimeInMinutes: 5},
+            ]
+        }
+
+        addTimebox = (newTimebox) => {
+            this.setState((prevState) => {
+                const expandTinderboxes = [...prevState.timeboxes, newTimebox]
+                return {
+                    timeboxes: expandTinderboxes
+                }
+            })
+        }
+
+        removeTimebox = (indexToRemove) => {
+            this.setState((prevState) => {
+                const newTimeboxArray = prevState.timeboxes.filter((timebox) => timebox.id !== indexToRemove)
+                return {
+                    timeboxes: newTimeboxArray
+                }
+            })
+        }
+
+        //TODO: Check that method
+        editTimebox = (indexToEdit) => {
+            return ('x')
+        }
+
+        handleCreate = () => {
+            this.addTimebox({id: 4, title: "Uczę się list - new", totalTimeInMinutes: 25})
+        }
+
+        render() {
+            return (
+                <div>
+                    <TimeBoxCreator onCreate={this.handleCreate}/>
+                    {this.state.timeboxes.map((timebox) => (
+                        <TimeBox
+                            key={timebox.id}
+                            timeboxDetails={timebox}
+                            onDelete={this.removeTimebox}
+                            onEdit={this.editTimebox}
+                        />
+                    ))}
+                </div>
+            )
+        }
+    }
+
+
+    const App = () => {
+        return (<div className="app">
+            <TimeboxList/>
+        </div>)
+    }
+
+    // const time = "10:30:00.023"
+
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement)
+    const app = (<App/>);
+    root.render(app)
+</script>
+</html>
+
