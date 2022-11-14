@@ -13,6 +13,7 @@
             src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js" integrity="sha512-rV0Q1QWodkoLjts/qP2XHtjvUPTmN46k4eH0lzOR3mDui8a0YnL/uqydipXA9mQ2wG6J4imL0BO6/26rcFho7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
@@ -89,20 +90,30 @@
         )
     }
 
-    const TimeBoxCreator = ({onCreate}) => {
+    const TimeBoxCreator = ({onCreate, contentDetails, onTitleChange, onTotalTimeChange}) => {
+
+        if (contentDetails === undefined) {
+            contentDetails = {
+                title: "",
+                totalTimeInMinutes: 0
+            }
+        }
+
+        const {title, totalTimeInMinutes} = contentDetails;
         return (
-                <div className="text-right border-solid border-gray-800 border-2 rounded-md p-3 mb-3">
-                    <label>
-                        Co robisz?
-                        <input className="border-solid border-gray-800 border-2"
-                               type="text"/>
-                    </label><br/>
-                    <label>Ile minut? <input className="border-solid border-gray-800 border-2"
-                                             type="number"/></label><br/>
+            <div className="text-right border-solid border-gray-800 border-2 rounded-md p-3 mb-3">
+                <label>
+                    Co robisz?
+                    <input className="border-solid border-gray-800 border-2" value={title} type="text" onChange={onTitleChange}/>
+                </label><br/>
+                <label>Ile minut? <input className="border-solid border-gray-800 border-2" value={totalTimeInMinutes} onChange={onTotalTimeChange} type="number"/></label><br/>
+                {onCreate && (
                     <Button onClick={onCreate}>
                         Dodaj Timebox
                     </Button>
-                </div>
+                )}
+
+            </div>
         )
     }
 
@@ -128,12 +139,10 @@
                     elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.1
                 }))
             }, 100)
-            console.log("START", this.intervalId);
         }
 
         stopTimer() {
             clearInterval(this.intervalId);
-            console.log("STOP", this.intervalId);
         }
 
         handleStart = () => {
@@ -241,31 +250,104 @@
         }
     }
 
-    const TimeBox = ({timeboxDetails, onDelete, onEdit}) => {
 
-        const {id, title, totalTimeInMinutes} = timeboxDetails;
-        return (
-            <>
-                <h3 className={"border-2 border-gray-800 my-2 rounded-md p-1"}>
-                    {title} - {totalTimeInMinutes} min.
-                </h3>
-                <Button onClick={() => {
-                    onDelete(id)
-                }}>Usuń</Button><br/>
-                <Button onClick={() => {
-                    onEdit(id)
-                }}>Zmień</Button>
-            </>
-        )
+    class TimeBox extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {
+                timeboxDetails: props.timeboxDetails,
+                onDelete: props.onDelete,
+                // onUpdate: props.onUpdate,
+                isEditable: false,
+            }
+            this.handleEdit = this.handleEdit.bind(this)
+            this.handleUpdate = this.handleUpdate.bind(this)
+            this.handleTitleChange = this.handleTitleChange.bind(this)
+            this.handleTotalTimeChange = this.handleTotalTimeChange.bind(this)
+        }
+
+        handleUpdate() {
+            this.setState({
+                isEditable: false,
+            })
+            this.props.onUpdate(this.state.timeboxDetails.id ,this.state.timeboxDetails);
+        }
+
+        handleEdit() {
+            this.setState({isEditable: true})
+        }
+
+        handleTitleChange = (event) => {
+            this.setState((prevState) => ({
+                timeboxDetails: {
+                    ...prevState.timeboxDetails,
+                    title: event.target.value
+                }
+            }))
+        }
+        handleTotalTimeChange = (event) => {
+            this.setState((prevState) => ({
+                timeboxDetails: {
+                    ...prevState.timeboxDetails,
+                    totalTimeInMinutes: event.target.value
+                }
+            }))
+        }
+
+        render() {
+            const {timeboxDetails, onDelete, onEdit, isEditable} = this.state;
+            const {id, title, totalTimeInMinutes} = timeboxDetails;
+
+            if (isEditable){
+                return (
+                    <>
+                        <TimeBoxCreator contentDetails={timeboxDetails} onTitleChange={this.handleTitleChange} onTotalTimeChange={this.handleTotalTimeChange}/>
+                        <Button onClick={() => {
+                            this.handleUpdate()
+                            // onUpdate(id, {...timeboxDetails, title: "updated title"})
+                        }}>Zapisz</Button>
+                    </>
+                )
+            }
+            return (
+                <>
+                    <h3 className={"border-2 border-gray-800 my-2 rounded-md p-1"}>
+                        {title} - {totalTimeInMinutes} min.
+                    </h3>
+                    <Button onClick={() => {
+                        onDelete(id)
+                    }}>Usuń</Button>
+                    <Button onClick={() => {
+                        this.handleEdit()
+                        // onUpdate(id, {...timeboxDetails, title: "updated title"})
+                    }}>Zmień</Button>
+                </>
+            )
+
+        }
     }
+
+    // } = ({timeboxDetails, onDelete, onUpdate}) => {
+    //
+    //     return (
+    //         <>
+    //             <h3 className={"border-2 border-gray-800 my-2 rounded-md p-1"}>
+    //                 {title} - {totalTimeInMinutes} min.
+    //             </h3>
+    //             <Button onClick={() => {onDelete(id)}}>Usuń</Button>
+    //             <Button onClick={() => {onUpdate(id, {...timeboxDetails, title: "updated title"})}}>Zmień</Button>
+    //         </>
+    //     )
+    // }
 
     class TimeboxList extends React.Component {
 
         state = {
             timeboxes: [
-                {id: 1, title: "Uczę się list", totalTimeInMinutes: 25},
-                {id: 2, title: "Uczę się formularzy", totalTimeInMinutes: 15},
-                {id: 3, title: "Uczę się komponentów niekontrolowanych", totalTimeInMinutes: 5},
+                {id: 0, title: "Uczę się list", totalTimeInMinutes: 25},
+                {id: 1, title: "Uczę się formularzy", totalTimeInMinutes: 15},
+                {id: 2, title: "Uczę się komponentów niekontrolowanych", totalTimeInMinutes: 5},
             ]
         }
 
@@ -280,20 +362,28 @@
 
         removeTimebox = (indexToRemove) => {
             this.setState((prevState) => {
-                const newTimeboxArray = prevState.timeboxes.filter((timebox) => timebox.id !== indexToRemove)
+                const newTimeboxArray = prevState.timeboxes.filter((timebox) => {
+                    return timebox.id !== indexToRemove;
+                })
                 return {
                     timeboxes: newTimeboxArray
                 }
             })
         }
 
-        //TODO: Check that method
-        editTimebox = (indexToEdit) => {
-            return ('x')
+        editTimebox = (indexToEdit, contentToUpdate) => {
+
+
+            this.setState(prevState => {
+                const updatedTimeboxArray = prevState.timeboxes.map((timebox, index) =>
+                    index === indexToEdit ? contentToUpdate : timebox
+                )
+                return {timeboxes: updatedTimeboxArray}
+            })
         }
 
         handleCreate = () => {
-            this.addTimebox({id: 4, title: "Uczę się list - new", totalTimeInMinutes: 25})
+            this.addTimebox({id: uuid.v4(), title: "Uczę się list - new", totalTimeInMinutes: 25})
         }
 
         render() {
@@ -305,7 +395,7 @@
                             key={timebox.id}
                             timeboxDetails={timebox}
                             onDelete={this.removeTimebox}
-                            onEdit={this.editTimebox}
+                            onUpdate={this.editTimebox}
                         />
                     ))}
                 </div>
