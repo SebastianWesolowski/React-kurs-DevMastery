@@ -2,106 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3586fe7-b9b4-4059-bf29-1c87ac670ebd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/kurs-reacta.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/prepareTime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/KursReacta.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/code-comments.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sebastian.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/esbuild" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/vite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild-darwin-arm64/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild-darwin-arm64/bin/esbuild" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild-darwin-arm64/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/bin/esbuild" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/install.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/lib/main.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/lib/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/esbuild/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-core-module/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-core-module/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-core-module/core.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-core-module/core.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-core-module/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/is-core-module/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/postcss/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/postcss/lib/container.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/lib/container.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/postcss/lib/map-generator.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/lib/map-generator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/postcss/lib/processor.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/lib/processor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/postcss/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/postcss/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/bin/rollup" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/bin/rollup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/rollup.browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/rollup.browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/rollup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/rollup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/watch.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/es/shared/watch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/loadConfigFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/loadConfigFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.browser.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.browser.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/rollup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/loadConfigFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/loadConfigFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/mergeOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/mergeOptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/rollup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch-cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch-cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/dist/shared/watch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/rollup/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/rollup/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/bin/openChrome.applescript" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/bin/vite.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/client.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/client/client.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/client/client.mjs.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/client/env.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/client/env.mjs.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node-cjs/publicUtils.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-07a79996.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-19c40c50.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-30a6f29e.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-42c2c4e4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/chunks/dep-4da11a5e.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/cli.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/constants.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/dist/node/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/index.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/src/client/client.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/src/client/env.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/src/client/overlay.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/src/client/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/alias.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/anymatch.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/chokidar.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/commonjs.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/connect.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/customEvent.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/dynamicImportVars.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/hmrPayload.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/hot.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/http-proxy.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/importGlob.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/importMeta.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/shims.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/terser.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/vite/types/ws.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prepareTime.js" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/atoms/Button/Button.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/atoms/Clock/Clock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/atoms/InactiveComponent/InactiveComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/atoms/ProgressBar/ProgressBar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/molecules/CurrentTimeBox/CurrentTimeBox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/molecules/TimeBoxEditor/TimeBoxEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/organisms/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/EditableTimeBox/EditableTimeBox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/TimeBox/TimeBox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/TimeBoxCreator/TimeBoxCreator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/TimeBoxList/TimeBoxList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -110,6 +35,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2JHQLoLDHOZ4xQETqLImu3mL2gc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -118,21 +46,32 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/sebastian/web/kurs-reacta&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.gutterIcons&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/sebastian/web/kurs-reacta/src/components/organisms",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JavaScript"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/organisms" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/atoms" />
+      <recent name="$PROJECT_DIR$/src/features" />
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/utils" />
     </key>
@@ -146,11 +85,14 @@
       <option name="presentableId" value="Default" />
       <updated>1671732475509</updated>
       <workItem from="1671732480276" duration="831000" />
-      <workItem from="1671750045057" duration="1710000" />
+      <workItem from="1671750045057" duration="4678000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
